@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReportProvider, useReport } from "./state/ReportContext";
+import { initVk } from "./lib/vk";
+import type { VkUser } from "./lib/vk";
 import { ToastProvider, Button, Modal, useToast } from "./components/ui";
 import { Icon } from "./components/icons";
 import { Sidebar, MobileSteps, STEPS } from "./components/Sidebar";
@@ -67,6 +69,17 @@ function Shell() {
   const [step, setStep] = useState<StepId>("org");
   const [resetOpen, setResetOpen] = useState(false);
   const [welcomeGone, setWelcomeGone] = useState(false);
+  const [vkUser, setVkUser] = useState<VkUser | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    initVk().then((u) => {
+      if (alive) setVkUser(u);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const idx = STEPS.findIndex((s) => s.id === step);
   const prev = idx > 0 ? STEPS[idx - 1] : null;
@@ -99,6 +112,27 @@ function Shell() {
               </div>
             </div>
             <SaveBadge />
+            {vkUser && (
+              <span
+                className="flex items-center gap-2 rounded-full border border-line bg-white py-1 pl-1 pr-3"
+                title="Мини-приложение запущено внутри ВКонтакте"
+              >
+                {vkUser.photo_100 ? (
+                  <img
+                    src={vkUser.photo_100}
+                    alt=""
+                    className="h-6 w-6 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pine-800 text-[10px] font-extrabold text-gold-400">
+                    {vkUser.first_name?.[0] ?? "В"}
+                  </span>
+                )}
+                <span className="text-[11px] font-bold text-ink-700">
+                  ВК: {vkUser.first_name}
+                </span>
+              </span>
+            )}
             <Button
               variant="outline"
               small
@@ -205,7 +239,7 @@ function Shell() {
             {step === "finance" && <FinanceStep />}
             {step === "programs" && <ProgramsStep />}
             {step === "photos" && <PhotosStep />}
-            {step === "preview" && <PreviewStep goTo={setStep} />}
+            {step === "preview" && <PreviewStep goTo={setStep} vkUser={vkUser} />}
 
             {/* нижняя навигация */}
             {step !== "preview" && (

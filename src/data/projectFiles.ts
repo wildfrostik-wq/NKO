@@ -20,6 +20,12 @@ import formatTs from "../lib/format.ts?raw";
 import imagesTs from "../lib/images.ts?raw";
 import exportPdfTs from "../lib/exportPdf.ts?raw";
 import downloadZipTs from "../lib/downloadZip.ts?raw";
+import vkTs from "../lib/vk.ts?raw";
+
+import botIndexJs from "../../bot/index.js?raw";
+import botPkgJson from "../../bot/package.json?raw";
+import botEnvExample from "../../bot/.env.example?raw";
+import botReadme from "../../bot/README.md?raw";
 
 import reportContextTsx from "../state/ReportContext.tsx?raw";
 
@@ -55,6 +61,11 @@ export const PROJECT_FILES: Array<[string, string]> = [
   ["src/lib/images.ts", imagesTs],
   ["src/lib/exportPdf.ts", exportPdfTs],
   ["src/lib/downloadZip.ts", downloadZipTs],
+  ["src/lib/vk.ts", vkTs],
+  ["bot/index.js", botIndexJs],
+  ["bot/package.json", botPkgJson],
+  ["bot/.env.example", botEnvExample],
+  ["bot/README.md", botReadme],
   ["src/state/ReportContext.tsx", reportContextTsx],
   ["src/data/demo.ts", demoTs],
   ["src/data/projectFiles.ts", projectFilesTs],

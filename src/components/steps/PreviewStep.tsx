@@ -3,11 +3,19 @@ import { useReport } from "../../state/ReportContext";
 import { Button, useToast } from "../ui";
 import { Icon } from "../icons";
 import { ReportDocument, countPages, PAGE_W, PAGE_H } from "../report/ReportDocument";
-import { exportReportPdf, sanitizeFileName } from "../../lib/exportPdf";
+import { buildReportPdf, sanitizeFileName } from "../../lib/exportPdf";
 import { downloadProjectZip } from "../../lib/downloadZip";
+import { isVkEmbedded, vkDownloadFile, vkOpenPostBox } from "../../lib/vk";
+import type { VkUser } from "../../lib/vk";
 import type { StepId } from "../../types";
 
-export function PreviewStep({ goTo }: { goTo: (s: StepId) => void }) {
+export function PreviewStep({
+  goTo,
+  vkUser,
+}: {
+  goTo: (s: StepId) => void;
+  vkUser: VkUser | null;
+}) {
   const { data, progress } = useReport();
   const { push } = useToast();
   const deskRef = useRef<HTMLDivElement>(null);
@@ -57,9 +65,19 @@ export function PreviewStep({ goTo }: { goTo: (s: StepId) => void }) {
       const name = `${sanitizeFileName(data.org.shortName || data.org.name)}_годовой_отчет_${
         data.year || "2025"
       }.pdf`;
-      const res = await exportReportPdf(exportRef.current, name, (page, total) =>
+      const res = await buildReportPdf(exportRef.current, (page, total) =>
         setExporting({ page, total }),
       );
+      // внутри ВК отдаём файл системному диалогу загрузки, иначе — обычное скачивание
+      if (isVkEmbedded()) {
+        const ok = await vkDownloadFile(res.pdf.output("datauristring"), name);
+        if (!ok) {
+          res.pdf.save(name);
+          push("Диалог ВК недоступен — файл сохранён стандартным способом", "warn");
+        }
+      } else {
+        res.pdf.save(name);
+      }
       const n = res.saved;
       push(
         res.failed > 0
@@ -73,6 +91,14 @@ export function PreviewStep({ goTo }: { goTo: (s: StepId) => void }) {
     } finally {
       setExporting(null);
     }
+  };
+
+  const onPublish = async () => {
+    const orgName = data.org.shortName || data.org.name || "нашей организации";
+    const text = `Годовой отчёт ${orgName} за ${data.year || "этот"} год готов. PDF-версия отчёта прикреплена к этому посту.`;
+    const ok = await vkOpenPostBox(text);
+    if (ok) push("Окно поста открыто — прикрепите скачанный PDF");
+    else push("Не удалось открыть окно поста", "warn");
   };
 
   return (
@@ -142,6 +168,17 @@ export function PreviewStep({ goTo }: { goTo: (s: StepId) => void }) {
         >
           {zipping ? "Собираем…" : "Проект (ZIP)"}
         </Button>
+        {vkUser && (
+          <Button
+            variant="dark"
+            icon="users"
+            onClick={onPublish}
+            disabled={!!exporting || zipping}
+            title="Открыть окно нового поста ВКонтакте — останется прикрепить скачанный PDF"
+          >
+            В сообщество
+          </Button>
+        )}
       </div>
 
       {/* «стол» с листами */}

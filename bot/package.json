@@ -1,0 +1,13 @@
+{
+  "name": "nko-report-bot",
+  "private": true,
+  "type": "module",
+  "description": "VK-бот для мини-приложения «Годовой отчёт НКО»: отправляет ссылку на конструктор и принимает готовый PDF",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "vk-io": "^4.8.3"
+  }
+}
