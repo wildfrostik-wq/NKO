@@ -9,6 +9,7 @@ import { OrgStep } from "./components/steps/OrgStep";
 import { MetricsStep } from "./components/steps/MetricsStep";
 import { FinanceStep } from "./components/steps/FinanceStep";
 import { ProgramsStep } from "./components/steps/ProgramsStep";
+import { TeamStep } from "./components/steps/TeamStep";
 import { PhotosStep } from "./components/steps/PhotosStep";
 import { PreviewStep } from "./components/steps/PreviewStep";
 import { downloadProjectZip } from "./lib/downloadZip";
@@ -238,6 +239,7 @@ function Shell() {
             {step === "metrics" && <MetricsStep />}
             {step === "finance" && <FinanceStep />}
             {step === "programs" && <ProgramsStep />}
+            {step === "team" && <TeamStep />}
             {step === "photos" && <PhotosStep />}
             {step === "preview" && <PreviewStep goTo={setStep} vkUser={vkUser} />}
 

@@ -25,6 +25,14 @@ export interface CustomMetric {
   value: string;
 }
 
+export interface TeamMember {
+  id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  photo: string;
+}
+
 export interface OrgInfo {
   name: string;
   shortName: string;
@@ -70,10 +78,11 @@ export interface ReportData {
   metrics: Metrics;
   finance: Finance;
   programs: Program[];
+  team: TeamMember[];
   photos: Photos;
 }
 
-export type StepId = "org" | "metrics" | "finance" | "programs" | "photos" | "preview";
+export type StepId = "org" | "metrics" | "finance" | "programs" | "team" | "photos" | "preview";
 
 export interface StepMeta {
   id: StepId;

@@ -41,6 +41,7 @@ export function emptyData(): ReportData {
     metrics: { beneficiaries: 0, volunteers: 0, staff: 0, events: 0, custom: [] },
     finance: { income: [], expenses: [], note: "" },
     programs: [],
+    team: [],
     photos: { cover: "", gallery: [] },
   };
 }
@@ -57,6 +58,7 @@ function loadData(): ReportData {
       metrics: { ...base.metrics, ...(parsed.metrics ?? {}) },
       finance: { ...base.finance, ...(parsed.finance ?? {}) },
       programs: Array.isArray(parsed.programs) ? parsed.programs : [],
+      team: Array.isArray(parsed.team) ? parsed.team : [],
       photos: { ...base.photos, ...(parsed.photos ?? {}) },
     };
   } catch {

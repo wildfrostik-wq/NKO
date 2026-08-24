@@ -10,6 +10,10 @@ export const DEMO_IMAGES = {
     "https://image.qwenlm.ai/generated-images/aa94d62f-fff3-4c0f-a3e4-fd1d96651a00/_result.png",
   photo3:
     "https://image.qwenlm.ai/generated-images/d1b17dbf-25a8-44d8-bbf7-71418c7df425/_result.png",
+  portrait1:
+    "https://image.qwenlm.ai/generated-images/f6d6c66b-3bac-4c9c-a9a7-5d21c977d974/_result.png",
+  portrait2:
+    "https://image.qwenlm.ai/generated-images/59468c65-8f7e-4a84-a38d-7bb75a474abb/_result.png",
 };
 
 export function demoData(): ReportData {
@@ -90,12 +94,41 @@ export function demoData(): ReportData {
         tag: "Здоровье",
         budget: 1230000,
         participants: 1350,
-        result:
-          "Бригада врача, психолога и социального работника посетила 14 посёлков; проведено 1 350 консультаций, 92 человека направлены на дополнительное обследование.",
+      result:
+        "Бригада врача, психолога и социального работника посетила 14 посёлков; проведено 1 350 консультаций, 92 человека направлены на дополнительное обследование.",
       },
     ],
-    photos: {
-      cover: DEMO_IMAGES.cover,
+    team: [
+      {
+        id: uid(),
+        firstName: "Марина",
+        lastName: "Клюева",
+        role: "Директор фонда",
+        photo: DEMO_IMAGES.portrait1,
+      },
+      {
+        id: uid(),
+        firstName: "Дмитрий",
+        lastName: "Ширяев",
+        role: "Координатор волонтёров",
+        photo: DEMO_IMAGES.portrait2,
+      },
+      {
+        id: uid(),
+        firstName: "Анна",
+        lastName: "Леденцова",
+        role: "Руководитель программ",
+        photo: "",
+      },
+      {
+        id: uid(),
+        firstName: "Павел",
+        lastName: "Мезенцев",
+        role: "Фандрайзинг и коммуникации",
+        photo: "",
+      },
+    ],
+    photos: {      cover: DEMO_IMAGES.cover,
       gallery: [
         {
           id: uid(),

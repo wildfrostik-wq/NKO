@@ -6,6 +6,7 @@ export const STEPS: StepMeta[] = [
   { id: "metrics", title: "Показатели года", short: "Показатели", desc: "Ключевая статистика деятельности", icon: "metrics" },
   { id: "finance", title: "Финансы", short: "Финансы", desc: "Поступления и расходы", icon: "finance" },
   { id: "programs", title: "Программы", short: "Программы", desc: "Проекты и их результаты", icon: "programs" },
+  { id: "team", title: "Команда", short: "Команда", desc: "Люди организации", icon: "users" },
   { id: "photos", title: "Фотографии", short: "Фото", desc: "Обложка и фоторепортаж", icon: "photos" },
   { id: "preview", title: "Отчёт и PDF", short: "Отчёт", desc: "Предпросмотр и выгрузка", icon: "file" },
 ];

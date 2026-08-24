@@ -553,60 +553,113 @@ function ProgramsPage({ data, page }: { data: ReportData; page: number }) {
   );
 }
 
+/** Подзаголовок блока страницы: номер, название и линейка. */
+function BlockLabel({ n, text }: { n: string; text: string }) {
+  return (
+    <div className="mb-[13px] flex items-center gap-[10px]">
+      <span className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-[6px] bg-pine-800 font-display text-[11px] font-bold text-gold-400">
+        {n}
+      </span>
+      <span className="font-body text-[11px] font-extrabold uppercase tracking-[0.14em] text-pine-800">
+        {text}
+      </span>
+      <span className="h-[2px] flex-1 bg-pine-100" />
+    </div>
+  );
+}
+
 function TeamPage({ data, page }: { data: ReportData; page: number }) {
-  const { org, year } = data;
+  const { org, team, year } = data;
+  const members = team
+    .filter((m) => m.firstName.trim() || m.lastName.trim())
+    .slice(0, 8);
   const partners = org.partners
     .split("\n")
     .map((s) => s.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .slice(0, 8);
 
   return (
     <PageShell section="Команда и партнёры" page={page} orgShort={org.shortName || org.name} year={year}>
       <SectionTitle num="04" title="Команда и партнёры" sub="Люди, без которых год бы не случился" />
 
-      {org.directorWord && (
-        <div className="mb-[26px] rounded-[12px] border-l-[5px] border-gold-500 bg-pine-50 px-[26px] py-[22px]">
-          <p className="font-report text-[14.5px] italic leading-[1.7] text-pine-900">
-            «{org.directorWord}»
-          </p>
-          {org.directorName && (
-            <div className="mt-[16px] flex items-center gap-[12px]">
-              <span className="h-[3px] w-[34px] bg-gold-500" />
-              <div>
-                <div className="font-display text-[13.5px] font-bold text-pine-900">
-                  {org.directorName}
+      {/* 1. Команда */}
+      <BlockLabel n="1" text="Команда" />
+      {members.length === 0 ? (
+        <div className="mb-[20px] rounded-[10px] border border-dashed border-pine-200 bg-pine-50/50 px-4 py-5 font-body text-[11.5px] text-ink-400">
+          Состав команды не указан — раздел можно заполнить в конструкторе или оставить пустым.
+        </div>
+      ) : (
+        <div className="mb-[22px] grid grid-cols-4 gap-[12px]">
+          {members.map((m) => (
+            <div key={m.id} className="rounded-[12px] border border-pine-100 bg-white p-[9px]">
+              {m.photo ? (
+                <Bg src={m.photo} className="h-[122px] w-full rounded-[8px]" />
+              ) : (
+                <div className="flex h-[122px] w-full items-center justify-center rounded-[8px] border border-pine-100 bg-pine-50">
+                  <span className="font-display text-[26px] font-bold text-pine-300">
+                    {((m.lastName[0] || "") + (m.firstName[0] || "")).toUpperCase() || "·"}
+                  </span>
                 </div>
-                <div className="font-body text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-500">
-                  {org.directorTitle || "руководитель"}
+              )}
+              <div className="mt-[9px] px-[2px] text-center">
+                <div className="font-body text-[12.5px] font-bold leading-tight text-pine-900">
+                  {[m.firstName, m.lastName].filter(Boolean).join(" ") || "Участник команды"}
                 </div>
+                {m.role && (
+                  <div className="mt-[4px] font-body text-[8.5px] font-extrabold uppercase tracking-[0.09em] text-ink-400">
+                    {m.role}
+                  </div>
+                )}
               </div>
             </div>
-          )}
+          ))}
         </div>
       )}
 
-      <div className="mb-[12px] flex items-center gap-2">
-        <span className="h-[3px] w-[22px] bg-gold-500" />
-        <span className="font-body text-[11px] font-extrabold uppercase tracking-[0.14em] text-pine-800">
-          Партнёры года
-        </span>
-      </div>
+      {/* 2. Партнёры проекта */}
+      <BlockLabel n="2" text="Партнёры проекта" />
       {partners.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-pine-200 bg-pine-50/50 px-4 py-6 font-body text-[11.5px] text-ink-400">
+        <div className="mb-[20px] rounded-[10px] border border-dashed border-pine-200 bg-pine-50/50 px-4 py-5 font-body text-[11.5px] text-ink-400">
           Партнёры не указаны — добавьте их в разделе «Организация».
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-[10px]">
+        <div className="mb-[22px] grid grid-cols-2 gap-[10px]">
           {partners.map((p) => (
             <div
               key={p}
-              className="flex items-center gap-[10px] rounded-[10px] border border-pine-100 bg-white px-[14px] py-[11px]"
+              className="flex items-center gap-[10px] rounded-[10px] border border-pine-100 bg-white px-[14px] py-[10px]"
             >
               <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-gold-500" />
               <span className="font-body text-[12px] font-semibold leading-snug text-ink-700">{p}</span>
             </div>
           ))}
         </div>
+      )}
+
+      {/* 3. Слово руководителя */}
+      {org.directorWord && (
+        <>
+          <BlockLabel n="3" text="Слово руководителя" />
+          <div className="rounded-[12px] border-l-[5px] border-gold-500 bg-pine-50 px-[26px] py-[20px]">
+            <p className="font-report text-[14px] italic leading-[1.7] text-pine-900">
+              «{org.directorWord}»
+            </p>
+            {org.directorName && (
+              <div className="mt-[14px] flex items-center gap-[12px]">
+                <span className="h-[3px] w-[34px] bg-gold-500" />
+                <div>
+                  <div className="font-display text-[13.5px] font-bold text-pine-900">
+                    {org.directorName}
+                  </div>
+                  <div className="font-body text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-500">
+                    {org.directorTitle || "руководитель"}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </>
       )}
     </PageShell>
   );

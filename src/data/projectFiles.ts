@@ -40,6 +40,7 @@ import orgStepTsx from "../components/steps/OrgStep.tsx?raw";
 import metricsStepTsx from "../components/steps/MetricsStep.tsx?raw";
 import financeStepTsx from "../components/steps/FinanceStep.tsx?raw";
 import programsStepTsx from "../components/steps/ProgramsStep.tsx?raw";
+import teamStepTsx from "../components/steps/TeamStep.tsx?raw";
 import photosStepTsx from "../components/steps/PhotosStep.tsx?raw";
 import previewStepTsx from "../components/steps/PreviewStep.tsx?raw";
 
@@ -76,6 +77,7 @@ export const PROJECT_FILES: Array<[string, string]> = [
   ["src/components/steps/MetricsStep.tsx", metricsStepTsx],
   ["src/components/steps/FinanceStep.tsx", financeStepTsx],
   ["src/components/steps/ProgramsStep.tsx", programsStepTsx],
+  ["src/components/steps/TeamStep.tsx", teamStepTsx],
   ["src/components/steps/PhotosStep.tsx", photosStepTsx],
   ["src/components/steps/PreviewStep.tsx", previewStepTsx],
   ["src/components/report/ReportDocument.tsx", reportDocumentTsx],
