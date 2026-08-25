@@ -94,41 +94,42 @@ export function demoData(): ReportData {
         tag: "Здоровье",
         budget: 1230000,
         participants: 1350,
-      result:
-        "Бригада врача, психолога и социального работника посетила 14 посёлков; проведено 1 350 консультаций, 92 человека направлены на дополнительное обследование.",
+        result:
+          "Бригада врача, психолога и социального работника посетила 14 посёлков; проведено 1 350 консультаций, 92 человека направлены на дополнительное обследование.",
       },
     ],
     team: [
       {
         id: uid(),
-        firstName: "Марина",
         lastName: "Клюева",
+        firstName: "Марина",
         role: "Директор фонда",
         photo: DEMO_IMAGES.portrait1,
       },
       {
         id: uid(),
+        lastName: "Овсянкин",
         firstName: "Дмитрий",
-        lastName: "Ширяев",
         role: "Координатор волонтёров",
         photo: DEMO_IMAGES.portrait2,
       },
       {
         id: uid(),
+        lastName: "Репина",
         firstName: "Анна",
-        lastName: "Леденцова",
         role: "Руководитель программ",
         photo: "",
       },
       {
         id: uid(),
-        firstName: "Павел",
-        lastName: "Мезенцев",
-        role: "Фандрайзинг и коммуникации",
+        lastName: "Савельев",
+        firstName: "Игорь",
+        role: "Финансовый менеджер",
         photo: "",
       },
     ],
-    photos: {      cover: DEMO_IMAGES.cover,
+    photos: {
+      cover: DEMO_IMAGES.cover,
       gallery: [
         {
           id: uid(),

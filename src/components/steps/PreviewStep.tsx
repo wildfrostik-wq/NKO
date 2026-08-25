@@ -107,10 +107,12 @@ export function PreviewStep({
       <div className="card-shadow sticky top-[57px] z-20 flex flex-wrap items-center gap-3 rounded-xl border border-line bg-card/95 px-4 py-3 backdrop-blur lg:top-3">
         <div className="mr-auto flex items-center gap-3">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-pine-800 text-gold-400">
-            <Icon name="file" className="h-4.5 w-4.5" strokeWidth={1.9} />
+            <Icon name="file" className="h-4 w-4" strokeWidth={1.9} />
           </span>
           <div>
-            <div className="text-[13.5px] font-bold leading-tight text-ink-900">Предпросмотр отчёта</div>
+            <div className="text-[13.5px] font-bold leading-tight text-ink-900">
+              Предпросмотр отчёта
+            </div>
             <div className="text-[11px] font-medium text-ink-400">
               {pages} {pages === 1 ? "страница" : pages < 5 ? "страницы" : "страниц"} · формат А4
             </div>
@@ -132,13 +134,9 @@ export function PreviewStep({
           >
             <span className="text-[16px] font-bold leading-none">−</span>
           </button>
-          <button
-            onClick={() => setFit(false)}
-            className="h-8 min-w-[52px] rounded-md px-1 text-[12px] font-bold tabular-nums text-ink-700 transition-colors hover:bg-pine-50"
-            title="Масштаб"
-          >
+          <span className="h-8 min-w-[52px] rounded-md px-1 text-center text-[12px] font-bold leading-8 tabular-nums text-ink-700">
             {Math.round(scale * 100)}%
-          </button>
+          </span>
           <button
             onClick={() => zoom(0.15)}
             className="flex h-8 w-8 items-center justify-center rounded-md text-ink-500 transition-colors hover:bg-pine-50 hover:text-pine-800"
@@ -156,7 +154,12 @@ export function PreviewStep({
           </button>
         </div>
 
-        <Button variant="gold" icon={exporting ? "reset" : "download"} onClick={onExport} disabled={!!exporting || zipping}>
+        <Button
+          variant="gold"
+          icon={exporting ? "reset" : "download"}
+          onClick={onExport}
+          disabled={!!exporting || zipping}
+        >
           {exporting ? `Стр. ${exporting.page} / ${exporting.total}` : "Скачать PDF"}
         </Button>
         <Button

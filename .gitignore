@@ -3,6 +3,7 @@ dist
 .DS_Store
 *.local
 npm-debug.log*
+.env
 node_modules/
 .next/
 dist/

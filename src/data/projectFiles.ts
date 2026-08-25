@@ -22,11 +22,6 @@ import exportPdfTs from "../lib/exportPdf.ts?raw";
 import downloadZipTs from "../lib/downloadZip.ts?raw";
 import vkTs from "../lib/vk.ts?raw";
 
-import botIndexJs from "../../bot/index.js?raw";
-import botPkgJson from "../../bot/package.json?raw";
-import botEnvExample from "../../bot/.env.example?raw";
-import botReadme from "../../bot/README.md?raw";
-
 import reportContextTsx from "../state/ReportContext.tsx?raw";
 
 import demoTs from "./demo.ts?raw";
@@ -46,6 +41,11 @@ import previewStepTsx from "../components/steps/PreviewStep.tsx?raw";
 
 import reportDocumentTsx from "../components/report/ReportDocument.tsx?raw";
 
+import botIndexJs from "../../bot/index.js?raw";
+import botPkgJson from "../../bot/package.json?raw";
+import botEnvExample from "../../bot/.env.example?raw";
+import botReadme from "../../bot/README.md?raw";
+
 export const PROJECT_FILES: Array<[string, string]> = [
   ["package.json", pkg],
   ["vite.config.js", viteConfig],
@@ -63,10 +63,6 @@ export const PROJECT_FILES: Array<[string, string]> = [
   ["src/lib/exportPdf.ts", exportPdfTs],
   ["src/lib/downloadZip.ts", downloadZipTs],
   ["src/lib/vk.ts", vkTs],
-  ["bot/index.js", botIndexJs],
-  ["bot/package.json", botPkgJson],
-  ["bot/.env.example", botEnvExample],
-  ["bot/README.md", botReadme],
   ["src/state/ReportContext.tsx", reportContextTsx],
   ["src/data/demo.ts", demoTs],
   ["src/data/projectFiles.ts", projectFilesTs],
@@ -81,4 +77,8 @@ export const PROJECT_FILES: Array<[string, string]> = [
   ["src/components/steps/PhotosStep.tsx", photosStepTsx],
   ["src/components/steps/PreviewStep.tsx", previewStepTsx],
   ["src/components/report/ReportDocument.tsx", reportDocumentTsx],
+  ["bot/index.js", botIndexJs],
+  ["bot/package.json", botPkgJson],
+  ["bot/.env.example", botEnvExample],
+  ["bot/README.md", botReadme],
 ];

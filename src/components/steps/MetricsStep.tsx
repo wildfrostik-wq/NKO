@@ -1,5 +1,12 @@
 import { useReport } from "../../state/ReportContext";
-import { Field, TextInput, Panel, Button, SectionHeader, useToast } from "../ui";
+import {
+  Field,
+  TextInput,
+  Panel,
+  Button,
+  SectionHeader,
+  useToast,
+} from "../ui";
 import { Icon } from "../icons";
 import { uid, fmtNum } from "../../lib/format";
 import type { CustomMetric, Metrics } from "../../types";
@@ -22,7 +29,7 @@ function StatCard({
     <div className="card-shadow group rounded-xl border border-line bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-pine-300">
       <div className="mb-3 flex items-center justify-between">
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-pine-50 text-pine-700 transition-colors group-hover:bg-pine-800 group-hover:text-gold-400">
-          <Icon name={icon} className="h-4.5 w-4.5" strokeWidth={1.9} />
+          <Icon name={icon} className="h-4 w-4" strokeWidth={1.9} />
         </span>
         <span className="font-display text-[22px] font-bold tabular-nums text-pine-800">
           {value > 0 ? fmtNum(value) : "—"}
@@ -65,7 +72,8 @@ export function MetricsStep() {
   const { push } = useToast();
   const m = data.metrics;
 
-  const setM = (p: Partial<Metrics>) => update((d) => ({ ...d, metrics: { ...d.metrics, ...p } }));
+  const setM = (p: Partial<Metrics>) =>
+    update((d) => ({ ...d, metrics: { ...d.metrics, ...p } }));
 
   const setCustom = (id: string, p: Partial<CustomMetric>) =>
     setM({ custom: m.custom.map((c) => (c.id === id ? { ...c, ...p } : c)) });
@@ -81,7 +89,10 @@ export function MetricsStep() {
           <TextInput
             value={data.year}
             onChange={(e) =>
-              update((d) => ({ ...d, year: e.target.value.replace(/[^\d]/g, "").slice(0, 4) }))
+              update((d) => ({
+                ...d,
+                year: e.target.value.replace(/[^\d]/g, "").slice(0, 4),
+              }))
             }
             className="w-24 text-center font-display font-bold"
             placeholder="2025"
@@ -162,7 +173,7 @@ export function MetricsStep() {
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-ink-300 transition-colors hover:bg-clay-50 hover:text-clay-600"
                   aria-label="Удалить показатель"
                 >
-                  <Icon name="trash" className="h-4.5 w-4.5" />
+                  <Icon name="trash" className="h-4 w-4" />
                 </button>
               </div>
             ))}

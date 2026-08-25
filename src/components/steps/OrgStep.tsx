@@ -1,6 +1,15 @@
 import { useRef, useState } from "react";
 import { useReport } from "../../state/ReportContext";
-import { Field, TextInput, TextArea, Panel, Hint, SectionHeader, Button, useToast } from "../ui";
+import {
+  Field,
+  TextInput,
+  TextArea,
+  Panel,
+  Hint,
+  SectionHeader,
+  Button,
+  useToast,
+} from "../ui";
 import { Icon } from "../icons";
 import { fileToDataUrl, approxDataUrlKb } from "../../lib/images";
 import type { OrgInfo } from "../../types";
@@ -165,7 +174,9 @@ export function OrgStep() {
           <Field label="Расчётный счёт">
             <TextInput
               value={org.bankAccount}
-              onChange={(e) => set({ bankAccount: e.target.value.replace(/[^\d]/g, "").slice(0, 20) })}
+              onChange={(e) =>
+                set({ bankAccount: e.target.value.replace(/[^\d]/g, "").slice(0, 20) })
+              }
               placeholder="20 цифр"
             />
           </Field>
@@ -213,7 +224,10 @@ export function OrgStep() {
         </div>
       </Panel>
 
-      <Field label="Партнёры года" hint="Каждый партнёр — с новой строки; попадут на страницу «Команда и партнёры»">
+      <Field
+        label="Партнёры года"
+        hint="Каждый партнёр — с новой строки; попадут на страницу «Команда и партнёры»"
+      >
         <TextArea
           rows={3}
           value={org.partners}
@@ -223,8 +237,8 @@ export function OrgStep() {
       </Field>
 
       <Hint>
-        Все поля необязательны, но чем больше заполнено, тем полнее получится отчёт:
-        пустые блоки автоматически не попадут на страницы PDF.
+        Все поля необязательны, но чем больше заполнено, тем полнее получится отчёт: пустые блоки
+        аккуратно заменяются заглушками или не попадают на страницы PDF.
       </Hint>
     </div>
   );

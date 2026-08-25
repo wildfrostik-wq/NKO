@@ -28,21 +28,15 @@ async function ensureFonts(): Promise<void> {
   }
 }
 
-export interface BuildResult {
-  pdf: jsPDF;
-  saved: number;
-  failed: number;
-}
-
 /**
  * Рендерит страницы отчёта (div.report-page) в многостраничный PDF A4.
- * Возвращает сам документ: вызывающий код решает, как его сохранить
- * (обычное скачивание в браузере или системный диалог ВКонтакте).
+ * Возвращает сам документ jsPDF — способ сохранения выбирает вызывающий код
+ * (в браузере — скачивание, внутри ВК — системный диалог загрузки).
  */
 export async function buildReportPdf(
   container: HTMLElement,
   onPage?: (page: number, total: number) => void,
-): Promise<BuildResult> {
+): Promise<{ pdf: jsPDF; saved: number; failed: number }> {
   const pages = Array.from(container.querySelectorAll<HTMLElement>(".report-page"));
   if (pages.length === 0) throw new Error("Нет страниц для экспорта");
 
@@ -74,7 +68,6 @@ export async function buildReportPdf(
     }
   }
 
-  if (failed >= pages.length) throw new Error("Ни одна страница не отрендерилась");
   return { pdf, saved: pages.length - failed, failed };
 }
 

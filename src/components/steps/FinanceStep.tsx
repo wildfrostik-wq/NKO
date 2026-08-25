@@ -1,5 +1,13 @@
 import { useReport } from "../../state/ReportContext";
-import { TextInput, TextArea, AmountInput, Panel, SectionHeader, Field, useToast } from "../ui";
+import {
+  TextInput,
+  TextArea,
+  AmountInput,
+  Panel,
+  SectionHeader,
+  Field,
+  useToast,
+} from "../ui";
 import { Icon } from "../icons";
 import { uid, fmtMoney } from "../../lib/format";
 import type { FinanceRow } from "../../types";
@@ -81,9 +89,7 @@ function FinanceTable({
           ))}
           <div
             className={`flex items-center justify-between border-t-2 px-4 py-2.5 ${
-              accent === "gold"
-                ? "border-gold-500 bg-gold-50"
-                : "border-pine-600 bg-pine-50"
+              accent === "gold" ? "border-gold-500 bg-gold-50" : "border-pine-600 bg-pine-50"
             }`}
           >
             <span className="text-[11px] font-extrabold uppercase tracking-[0.08em] text-ink-700">
@@ -103,7 +109,8 @@ export function FinanceStep() {
   const { data, update, incomeTotal, expenseTotal } = useReport();
   const f = data.finance;
 
-  const setF = (p: Partial<typeof f>) => update((d) => ({ ...d, finance: { ...d.finance, ...p } }));
+  const setF = (p: Partial<typeof f>) =>
+    update((d) => ({ ...d, finance: { ...d.finance, ...p } }));
   const balance = incomeTotal - expenseTotal;
 
   return (
@@ -111,7 +118,7 @@ export function FinanceStep() {
       <SectionHeader
         icon="finance"
         title="Финансы"
-        desc="Поступления и расходы за год — в отчёте это аккуратные таблицы с итогами и диаграммой."
+        desc="Поступления и расходы за год — в отчёте это аккуратные таблицы с итогами и диаграммой структуры расходов."
       />
 
       <div className="grid gap-3 sm:grid-cols-3">
@@ -172,7 +179,10 @@ export function FinanceStep() {
         />
       </div>
 
-      <Field label="Примечание к финансовому разделу" hint="Например: кто проводил аудит и где опубликована отчётность">
+      <Field
+        label="Примечание к финансовому разделу"
+        hint="Например: кто проводил аудит и где опубликована отчётность"
+      >
         <TextArea
           rows={3}
           value={f.note}

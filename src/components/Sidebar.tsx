@@ -6,7 +6,7 @@ export const STEPS: StepMeta[] = [
   { id: "metrics", title: "Показатели года", short: "Показатели", desc: "Ключевая статистика деятельности", icon: "metrics" },
   { id: "finance", title: "Финансы", short: "Финансы", desc: "Поступления и расходы", icon: "finance" },
   { id: "programs", title: "Программы", short: "Программы", desc: "Проекты и их результаты", icon: "programs" },
-  { id: "team", title: "Команда", short: "Команда", desc: "Люди организации", icon: "users" },
+  { id: "team", title: "Команда", short: "Команда", desc: "Люди и партнёры — необязательно", icon: "users" },
   { id: "photos", title: "Фотографии", short: "Фото", desc: "Обложка и фоторепортаж", icon: "photos" },
   { id: "preview", title: "Отчёт и PDF", short: "Отчёт", desc: "Предпросмотр и выгрузка", icon: "file" },
 ];
@@ -65,7 +65,10 @@ export function Sidebar({
                 {done && !isPreview && !active ? (
                   <Icon name="check" className="h-4 w-4" strokeWidth={2.4} />
                 ) : (
-                  i + 1
+                  <span className="flex items-center gap-1.5">
+                    {i + 1}
+                    <Icon name={s.icon} className="h-3.5 w-3.5 opacity-70" strokeWidth={2} />
+                  </span>
                 )}
               </span>
               <span className="min-w-0">

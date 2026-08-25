@@ -12,7 +12,7 @@ import type { ReportData } from "../types";
 import { demoData } from "../data/demo";
 import { sumRows } from "../lib/format";
 
-const LS_KEY = "nko-annual-report-v2";
+const LS_KEY = "nko-annual-report-v3";
 
 export type SaveState = "saved" | "saving" | "error";
 
@@ -128,13 +128,17 @@ export function ReportProvider({ children }: { children: ReactNode }) {
       metrics: Boolean(String(data.year).trim() && data.metrics.beneficiaries > 0),
       finance: incomeTotal > 0 && expenseTotal > 0,
       programs: data.programs.length > 0,
+      team: data.team.some((m) => m.firstName.trim() || m.lastName.trim()),
       photos: Boolean(data.photos.cover || data.photos.gallery.length > 0),
     };
-    const filled = Object.values(completion).filter(Boolean).length;
+    // «Команда» — необязательный раздел, на готовность не влияет
+    const coreKeys = ["org", "metrics", "finance", "programs", "photos"];
+    const filled = coreKeys.filter((k) => completion[k]).length;
     const isPristine =
       !data.org.name &&
       data.finance.income.length === 0 &&
       data.programs.length === 0 &&
+      data.team.length === 0 &&
       data.metrics.beneficiaries === 0;
     return {
       data,
@@ -144,7 +148,7 @@ export function ReportProvider({ children }: { children: ReactNode }) {
       resetAll,
       isPristine,
       completion,
-      progress: Math.round((filled / 5) * 100),
+      progress: Math.round((filled / coreKeys.length) * 100),
       incomeTotal,
       expenseTotal,
     };

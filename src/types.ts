@@ -13,6 +13,14 @@ export interface Program {
   result: string;
 }
 
+export interface TeamMember {
+  id: string;
+  lastName: string;
+  firstName: string;
+  role: string;
+  photo: string;
+}
+
 export interface GalleryPhoto {
   id: string;
   src: string;
@@ -23,14 +31,6 @@ export interface CustomMetric {
   id: string;
   label: string;
   value: string;
-}
-
-export interface TeamMember {
-  id: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  photo: string;
 }
 
 export interface OrgInfo {
@@ -82,7 +82,14 @@ export interface ReportData {
   photos: Photos;
 }
 
-export type StepId = "org" | "metrics" | "finance" | "programs" | "team" | "photos" | "preview";
+export type StepId =
+  | "org"
+  | "metrics"
+  | "finance"
+  | "programs"
+  | "team"
+  | "photos"
+  | "preview";
 
 export interface StepMeta {
   id: StepId;

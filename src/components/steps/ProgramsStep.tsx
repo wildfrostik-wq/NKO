@@ -1,5 +1,13 @@
 import { useReport } from "../../state/ReportContext";
-import { TextInput, TextArea, AmountInput, Button, SectionHeader, useToast, Panel } from "../ui";
+import {
+  TextInput,
+  TextArea,
+  AmountInput,
+  Panel,
+  Button,
+  SectionHeader,
+  useToast,
+} from "../ui";
 import { Icon } from "../icons";
 import { uid, fmtNum } from "../../lib/format";
 import type { Program } from "../../types";
@@ -41,8 +49,8 @@ export function ProgramsStep() {
           </span>
           <div className="text-[15px] font-bold text-ink-700">Программ пока нет</div>
           <p className="max-w-sm text-[13px] leading-relaxed text-ink-400">
-            Добавьте хотя бы одну программу — в отчёте она станет карточкой с бюджетом, числом участников
-            и описанием результата.
+            Добавьте хотя бы одну программу — в отчёте она станет карточкой с бюджетом, числом
+            участников и описанием результата.
           </p>
         </div>
       ) : (
@@ -64,7 +72,7 @@ export function ProgramsStep() {
                   className="ml-auto flex h-9 w-9 items-center justify-center rounded-lg text-ink-300 transition-colors hover:bg-clay-50 hover:text-clay-600"
                   aria-label="Удалить программу"
                 >
-                  <Icon name="trash" className="h-4.5 w-4.5" />
+                  <Icon name="trash" className="h-4 w-4" />
                 </button>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -109,7 +117,7 @@ export function ProgramsStep() {
                           setP(p.id, { participants: Number.isFinite(n) ? n : 0 });
                         }}
                         placeholder="0"
-                        className="pr-10 text-right tabular-nums"
+                        className="pr-12 text-right tabular-nums"
                       />
                       <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[13px] font-semibold text-ink-400">
                         чел.

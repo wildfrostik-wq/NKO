@@ -119,19 +119,13 @@ function Shell() {
                 title="Мини-приложение запущено внутри ВКонтакте"
               >
                 {vkUser.photo_100 ? (
-                  <img
-                    src={vkUser.photo_100}
-                    alt=""
-                    className="h-6 w-6 rounded-full object-cover"
-                  />
+                  <img src={vkUser.photo_100} alt="" className="h-6 w-6 rounded-full object-cover" />
                 ) : (
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-pine-800 text-[10px] font-extrabold text-gold-400">
                     {vkUser.first_name?.[0] ?? "В"}
                   </span>
                 )}
-                <span className="text-[11px] font-bold text-ink-700">
-                  ВК: {vkUser.first_name}
-                </span>
+                <span className="text-[11px] font-bold text-ink-700">ВК: {vkUser.first_name}</span>
               </span>
             )}
             <Button
@@ -141,6 +135,7 @@ function Shell() {
               onClick={() => {
                 loadDemo();
                 setStep("preview");
+                setWelcomeGone(true);
                 push("Демо-данные загружены — посмотрите раздел «Отчёт и PDF»");
               }}
             >
@@ -176,6 +171,7 @@ function Shell() {
               onClick={() => {
                 loadDemo();
                 setStep("preview");
+                setWelcomeGone(true);
                 push("Демо-данные загружены");
               }}
             >
@@ -199,13 +195,15 @@ function Shell() {
             <div className="anim-fade-up mb-6 flex flex-wrap items-center gap-4 overflow-hidden rounded-2xl border border-pine-800 bg-pine-900 px-6 py-5 text-pine-100 shadow-[0_16px_40px_-18px_rgba(7,33,28,0.8)]">
               <div className="mr-auto flex items-center gap-4">
                 <span className="anim-float flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gold-500 text-pine-950">
-                  <Icon name="spark" className="h-5.5 w-5.5" strokeWidth={2} />
+                  <Icon name="spark" className="h-5 w-5" strokeWidth={2} />
                 </span>
                 <div>
-                  <div className="font-display text-[14px] font-bold text-white">Начнём годовой отчёт?</div>
+                  <div className="font-display text-[14px] font-bold text-white">
+                    Начнём годовой отчёт?
+                  </div>
                   <p className="mt-0.5 max-w-md text-[12.5px] leading-snug text-pine-200">
-                    Заполните пять разделов — и скачайте свёрстанный публичный отчёт в PDF. Хотите сначала
-                    посмотреть, как это выглядит?
+                    Заполните шесть разделов — и скачайте свёрстанный публичный отчёт в PDF. Хотите
+                    сначала посмотреть, как это выглядит?
                   </p>
                 </div>
               </div>
@@ -228,7 +226,7 @@ function Shell() {
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-pine-300 transition-colors hover:bg-pine-800 hover:text-white"
                   aria-label="Скрыть подсказку"
                 >
-                  <Icon name="close" className="h-4.5 w-4.5" strokeWidth={2} />
+                  <Icon name="close" className="h-4 w-4" strokeWidth={2} />
                 </button>
               </div>
             </div>
@@ -254,11 +252,9 @@ function Shell() {
                   <span />
                 )}
                 <div className="flex items-center gap-4">
-                  {next && completion[step] !== undefined && (
-                    <span className="hidden text-[11.5px] font-semibold text-ink-300 sm:block">
-                      {completion[step] ? "Раздел заполнен" : "Раздел ещё не заполнен"}
-                    </span>
-                  )}
+                  <span className="hidden text-[11.5px] font-semibold text-ink-300 sm:block">
+                    {completion[step] ? "Раздел заполнен" : "Раздел ещё не заполнен"}
+                  </span>
                   {next && (
                     <Button onClick={goNext}>
                       Далее: {next.title}
@@ -271,7 +267,8 @@ function Shell() {
           </div>
 
           <footer className="mx-auto mt-12 max-w-[920px] border-t border-line pb-4 pt-5 text-center text-[11px] font-medium text-ink-300">
-            Данные хранятся только в вашем браузере и никуда не отправляются. Отчёт формируется локально в PDF.
+            Данные хранятся только в вашем браузере и никуда не отправляются. Отчёт формируется
+            локально в PDF.
           </footer>
         </div>
       </main>
@@ -300,8 +297,8 @@ function Shell() {
           </>
         }
       >
-        Будут удалены все введённые сведения: организация, финансы, программы и загруженные фотографии.
-        Это действие нельзя отменить.
+        Будут удалены все введённые сведения: организация, финансы, программы, команда и
+        загруженные фотографии. Это действие нельзя отменить.
       </Modal>
     </div>
   );

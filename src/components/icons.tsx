@@ -118,42 +118,6 @@ const P: Record<string, ReactNode> = {
   heart: (
     <path d="M12 20.5S3.5 15 3.5 9.4A4.4 4.4 0 0 1 8 5c1.7 0 3.2.9 4 2.2A4.7 4.7 0 0 1 16 5a4.4 4.4 0 0 1 4.5 4.4c0 5.6-8.5 11.1-8.5 11.1Z" />
   ),
-  mail: (
-    <>
-      <rect x="3.5" y="5.5" width="17" height="13" rx="1.5" />
-      <path d="m4.5 7.5 7.5 5.5 7.5-5.5" />
-    </>
-  ),
-  phone: (
-    <path d="M5.5 4h3.6l1.5 4.2-2.2 1.6a12.5 12.5 0 0 0 5.8 5.8l1.6-2.2L20 14.9v3.6a1.9 1.9 0 0 1-2 1.9A15.9 15.9 0 0 1 3.6 6a1.9 1.9 0 0 1 1.9-2Z" />
-  ),
-  globe: (
-    <>
-      <circle cx="12" cy="12" r="8.5" />
-      <path d="M3.5 12h17" />
-      <path d="M12 3.5a13.6 13.6 0 0 1 0 17 13.6 13.6 0 0 1 0-17Z" />
-    </>
-  ),
-  eye: (
-    <>
-      <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
-      <circle cx="12" cy="12" r="3" />
-    </>
-  ),
-  info: (
-    <>
-      <circle cx="12" cy="12" r="8.5" />
-      <path d="M12 11v5" />
-      <path d="M12 7.8h.01" />
-    </>
-  ),
-  bank: (
-    <>
-      <path d="m3 9.5 9-5.5 9 5.5" />
-      <path d="M5 10v8M9.7 10v8M14.3 10v8M19 10v8" />
-      <path d="M3.5 20.5h17" />
-    </>
-  ),
   pen: <path d="m4.5 19.5 1-4L17 4l3 3-11.5 11.5-4 1Z" />,
   calendar: (
     <>
@@ -168,10 +132,18 @@ const P: Record<string, ReactNode> = {
       <path d="m3 12.5 9 5 9-5" />
     </>
   ),
-  pin: (
+  bank: (
     <>
-      <path d="M12 21s-6.5-5.6-6.5-10.4a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" />
-      <circle cx="12" cy="10.4" r="2.3" />
+      <path d="m3 9.5 9-5.5 9 5.5" />
+      <path d="M5 10v8M9.7 10v8M14.3 10v8M19 10v8" />
+      <path d="M3.5 20.5h17" />
+    </>
+  ),
+  info: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 11v5" />
+      <path d="M12 7.8h.01" />
     </>
   ),
 };
@@ -201,7 +173,7 @@ export function Icon({
   );
 }
 
-/** Фирменный знак приложения. */
+/** Фирменный знак приложения — «отчёт-северное сияние». */
 export function BrandMark({ className = "h-9 w-9" }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
